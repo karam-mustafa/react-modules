@@ -8,8 +8,10 @@ function App() {
   return (
     <>
       <HomeNavbar />
-      <Outlet />
-      <HomeFooter />
+      <div className="container">
+        <Outlet />
+      </div>
+      <HomeFooter  />
     </>
   );
 }

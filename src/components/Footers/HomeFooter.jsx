@@ -3,7 +3,7 @@ import './../styles.css';
 
 export default function HomeFooter() {
   return (
-    <div className="row footer">
+    <div className="row footer container">
       <div className="col-6">
         <ul className="unstyled-list text-white">
           <li>Contact us</li>
