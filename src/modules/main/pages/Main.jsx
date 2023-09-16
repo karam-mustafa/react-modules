@@ -10,19 +10,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { FETCH_PRODUCTS } from "../store/actions/types";
 
 export default function Main() {
-  const data = useSelector((state) => state.products);
+  const data = useSelector((state) => state.products.products);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   let controler;
 
   useEffect(() => {
-    fetchProdcts().then((res) => {
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: res,
-      });
-    });
+    dispatch(fetchProdcts())
   }, []);
 
   const search = async (value) => {
@@ -32,12 +27,7 @@ export default function Main() {
 
     controler = new AbortController();
 
-    searchProdcts(value, controler.signal).then((res) => {
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: res,
-      });
-    });
+    dispatch(searchProdcts(value, controler.signal))
   };
 
   return (
