@@ -5,9 +5,10 @@ import Button from "react-bootstrap/Button";
 import axios from "axios";
 import toast from "react-hot-toast";
 import axiosInstance from "../../../utils/axios";
-import { fetchProdcts, searchProdcts } from "../store/actions";
+import { searchProdcts } from "../store/actions";
 import { useDispatch, useSelector } from "react-redux";
 import { FETCH_PRODUCTS } from "../store/actions/types";
+import { fetchProdcts } from "../store/slice";
 
 export default function Main() {
   const data = useSelector((state) => state.products.products);
