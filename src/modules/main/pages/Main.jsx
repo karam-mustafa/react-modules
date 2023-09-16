@@ -2,27 +2,18 @@ import React, { useEffect, useState } from "react";
 import { Row, Col, InputGroup, Form, Spinner } from "react-bootstrap";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import axios from "axios";
-import toast from "react-hot-toast";
-import axiosInstance from "../../../utils/axios";
-import { fetchProdcts, searchProdcts } from "../store/actions";
+import { fetchProdcts, searchProdcts } from "../store/slice/products.slice";
 import { useDispatch, useSelector } from "react-redux";
-import { FETCH_PRODUCTS } from "../store/actions/types";
 
 export default function Main() {
-  const data = useSelector((state) => state.products);
+  const data = useSelector((state) => state.products.products);
   const [loading, setLoading] = useState(false);
   const dispatch = useDispatch();
 
   let controler;
 
   useEffect(() => {
-    fetchProdcts().then((res) => {
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: res,
-      });
-    });
+    dispatch(fetchProdcts());
   }, []);
 
   const search = async (value) => {
@@ -32,12 +23,7 @@ export default function Main() {
 
     controler = new AbortController();
 
-    searchProdcts(value, controler.signal).then((res) => {
-      dispatch({
-        type: FETCH_PRODUCTS,
-        payload: res,
-      });
-    });
+    dispatch(searchProdcts(value, controler.signal));
   };
 
   return (
@@ -69,7 +55,7 @@ export default function Main() {
           </div>
         ) : (
           data.length &&
-          data?.map((item, index) => [
+          data?.map((item, index) => {
             <Col lg={4} md={4} sm={12}>
               <Card className="my-4" style={{ width: "100%" }}>
                 <Card.Img variant="top" src={item.images[0]} />
@@ -79,8 +65,8 @@ export default function Main() {
                   <Button variant="primary">Go somewhere</Button>
                 </Card.Body>
               </Card>
-            </Col>,
-          ])
+            </Col>
+          })
         )}
       </Row>
     </Row>

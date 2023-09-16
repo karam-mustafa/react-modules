@@ -18,6 +18,7 @@ import NotAuthorized from "./components/NotAuthorized.jsx";
 
 
 const isAuthenticated = localStorage.getItem('user');
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route path="/" element={<App />}>
@@ -26,7 +27,7 @@ const router = createBrowserRouter(
         path="teachers"
         element={
           <GuardedRoutes
-            isAccessable={isAuthenticated}
+            isAccessable={!isAuthenticated}
             OnSucess={() => <Teachers />}
           />
         }

@@ -8,7 +8,7 @@ axiosInstance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.log(error);
+    toast.error(error.getMessage());
   }
 );
 axiosInstance.interceptors.response.use(
@@ -18,7 +18,7 @@ axiosInstance.interceptors.response.use(
   },
 
   (error) => {
-    console.log(error);
+    toast.error(error.getMessage());
   }
 );
 
